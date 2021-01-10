@@ -1,7 +1,6 @@
 class PrototypesController < ApplicationController
-  before_action :authenticate_user!, except: [:create, :destroy, :edit]
+  before_action :authenticate_user!, only: [:create, :destroy, :edit]
   before_action :correct_user, only: [:edit, :update]
-
 
   def index
     @prototypes = Prototype.all
@@ -13,8 +12,7 @@ class PrototypesController < ApplicationController
 
   def create
     @prototype = Prototype.create(prototype_params)
-    if
-      @prototype.save
+    if @prototype.save
       redirect_to root_path
     else
       render :new
@@ -61,4 +59,5 @@ class PrototypesController < ApplicationController
         redirect_to root_path
       end
   end
+
 end
